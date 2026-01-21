@@ -1,7 +1,7 @@
 # VehicleDestruction
 
 This Mod adds destruction to vehicles in Kitten Space Agency. Currently the only way to do this is by pressing **'** (apostrophe) while piloting a vehicle.
-In the future I plan to make it where if a vehicle colides with something at high speeds it will be destroyed.
+In the future I plan to make it where if a vehicle collides with something at high speeds it will be destroyed.
 
 **License:** MIT License
 
