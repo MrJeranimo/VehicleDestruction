@@ -7,9 +7,7 @@ In the future I plan to make it where if a vehicle collides with something at hi
 
 ## Dependencies
 
-Each of the dependencies must be installed and put into the `KSA/Content/` folder and have their `mod.toml` info put into the `manifest.toml` in `Documents/MyGames/Kitten Space Agency/`.
-
-1. ModMenu: [GitHub](https://github.com/MrJeranimo/ModMenu/tree/v0.1.0), [SpaceDock](https://spacedock.info/mod/4054/ModMenu)
+None currently
 
 ## Using as a Dependency
 
