@@ -22,11 +22,11 @@ namespace VehicleDestruction
             var vehicles = Universe.CurrentSystem?.Vehicles;
 			if (vehicles != null)
 			{
-                DefaultCategory.Log.Info($"{vehicle.Id} has crashed while going {vehicle.GetSurfaceSpeed():F2}m/s");
-                var vehiclesList = vehicles.GetList();
-				int index = vehiclesList.IndexOf(vehicle) + 1;
+                SendVehicleInfo(vehicle);
 
-				// Gets rid of vehicle in Ground Tracking, GameAudio, and the parent Astronomical's Children list
+                Program.SetCameraMode(CameraMode.Map);
+
+                // Gets rid of vehicle in Ground Tracking, GameAudio, and the parent Astronomical's Children list
                 vehicle.Dispose();
 
                 // Deregister the vehicle from the system's vehicle list
@@ -35,27 +35,18 @@ namespace VehicleDestruction
                 // Disable orbit display for the destroyed vehicle
                 vehicle.ShowOrbit = false;
 
-				// If there are no vehicles left, move the camera to the first object in the system
-				if (vehicles.GetList().Count == 0)
-                {
-                    Universe.MoveCameraTo(Universe.CurrentSystem?.All.GetList()[0]!);
-                }
-                // Go to the next vehicle in the list
-                else if (index < vehiclesList.Count - 1)
-				{
-                    Program.GetMapController().Camera.SetFollow(vehiclesList[index], true);
-                    Universe.MoveCameraTo(vehiclesList[index]);
-				}
-                // Wrap around to the first vehicle if at the end of the list
-                else if (index >= vehiclesList.Count - 1) 
-				{
-					index = 0;
-                    Program.GetMapController().Camera.SetFollow(vehiclesList[index], true);
-                    Universe.MoveCameraTo(vehiclesList[index]);
-                }
                 return true;
             }
             return false;
+        }
+
+        public static void SendVehicleInfo(Vehicle vehicle)
+        {
+            VehicleDestructionMod.LastCrashedVehicle = vehicle;
+            VehicleDestructionMod.CrashOccurred = true;
+            VehicleDestructionMod.VehicleCrashSpeed = vehicle.GetSurfaceSpeed();
+            VehicleDestructionMod.VehicleCrashId = vehicle.Id;
+            VehicleDestructionMod.VehicleCrashedInto = vehicle.Parent;
         }
     }
 }
