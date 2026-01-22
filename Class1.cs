@@ -1,5 +1,4 @@
-﻿using Brutal.Logging;
-using HarmonyLib;
+﻿using HarmonyLib;
 using KSA;
 using StarMap.API;
 
@@ -20,6 +19,15 @@ namespace VehicleDestruction
         public void OnUnload()
         {
             MHarmony.UnpatchAll(nameof(Main));
+        }
+
+        [StarMapAfterGui]
+        public void CollisionCheck(double dt)
+        {
+            if (Program.ControlledVehicle != null)
+            {
+                CollisionDetector.Collision(Program.ControlledVehicle);
+            }
         }
     }
 }
