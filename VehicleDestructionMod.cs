@@ -17,9 +17,16 @@ namespace VehicleDestruction
         [StarMapAfterGui]
         public void CollisionCheck(double dt)
         {
-            if (Program.ControlledVehicle != null)
+            var vehicles = Universe.CurrentSystem?.Vehicles.GetList();
+            if(vehicles != null)
             {
-                CollisionDetector.Collision(Program.ControlledVehicle);
+                foreach (var vehicle in vehicles)
+                {
+                    if (CollisionDetector.Collision(vehicle))
+                    {
+                        break;
+                    }
+                }
             }
         }
 

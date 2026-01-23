@@ -24,7 +24,11 @@ namespace VehicleDestruction
 			{
                 SendVehicleInfo(vehicle);
 
-                Program.SetCameraMode(CameraMode.Map);
+                if (Program.ControlledVehicle == vehicle)
+                {
+                    Program.SetCameraMode(CameraMode.Map);
+                    VehicleDestructionMod.CrashOccurred = true;
+                }
 
                 // Gets rid of vehicle in Ground Tracking, GameAudio, and the parent Astronomical's Children list
                 vehicle.Dispose();
@@ -43,7 +47,6 @@ namespace VehicleDestruction
         public static void SendVehicleInfo(Vehicle vehicle)
         {
             VehicleDestructionMod.LastCrashedVehicle = vehicle;
-            VehicleDestructionMod.CrashOccurred = true;
             VehicleDestructionMod.VehicleCrashSpeed = vehicle.GetSurfaceSpeed();
             VehicleDestructionMod.VehicleCrashId = vehicle.Id;
             VehicleDestructionMod.VehicleCrashedInto = vehicle.Parent;
