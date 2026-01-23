@@ -33,53 +33,16 @@ namespace VehicleDestruction
         [StarMapBeforeGui]
         public void CreateCrashReport(double dt)
         {
-            if(CrashOccurred)
+            if(VehicleCrashLog.ShowWindow)
             {
-                if (LastCrashedVehicle.Id == "AEbtf4")
-                {
-                    if(ImGui.Begin("Vehicle Crash Log", ref CrashOccurred, ImGuiWindowFlags.AlwaysAutoResize))
-                    {
-                        ImGui.Text("No Vehicles crashed yet.");
-                    }
-                    ImGui.End();
-                }
-                else if(ImGui.Begin("Vehicle Crash Log", ref CrashOccurred, ImGuiWindowFlags.AlwaysAutoResize))
-                {
-                    ImGui.Text($"Vehicle ID: {LastCrashedVehicle.Id}");
-                    ImGui.Text($"Crash Speed: {LastCrashedVehicle.GetSurfaceSpeed():F2} m/s");
-                    ImGui.Text($"Crashed Into: {VehicleCrashedInto.Id}");
-                    ImGui.Separator();
-                    var vehicleList = Universe.CurrentSystem?.Vehicles.GetList();
-                    if(vehicleList != null && vehicleList.Count > 0)
-                    {
-                        ImGui.Text("Remaining Vehicles:");
-                        foreach (var vehicle in vehicleList)
-                        {
-                            if(ImGui.Button($"{vehicle.Id} - At: {vehicle.Parent.Id}"))
-                            {
-                                Program.SetCameraMode(CameraMode.Orbit);
-                                Universe.MoveCameraTo(vehicle);
-                                CrashOccurred = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        ImGui.Text("No remaining vehicles in the system.");
-                        if (ImGui.Button("Close"))
-                        {
-                            CrashOccurred = false;
-                        }
-                    }
-                    ImGui.End();
-                }
+                VehicleCrashLog.CreateCrashWindow();
             }
         }
 
         [ModMenuEntry("Vehicle Destruction")]
         public void OpenLastCrashReport()
         {
-            ImGui.MenuItem("View Last Crash Report", ImString.Null, ref CrashOccurred);
+            ImGui.MenuItem("Vehicle Crash Log", ImString.Null, ref VehicleCrashLog.ShowWindow);
         }
     }
 }

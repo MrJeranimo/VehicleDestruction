@@ -3,7 +3,7 @@ using KSA;
 
 namespace VehicleDestruction
 {
-    internal class CollisionDetector
+    public class CollisionDetector
     {
         public static bool Collision(Vehicle vehicle)
         {
@@ -22,7 +22,7 @@ namespace VehicleDestruction
             var vehicles = Universe.CurrentSystem?.Vehicles;
 			if (vehicles != null)
 			{
-                SendVehicleInfo(vehicle);
+                VehicleCrashLog.LogCrash(vehicle, Universe.GetElapsedSimTime());
 
                 if (Program.ControlledVehicle == vehicle)
                 {
@@ -42,14 +42,6 @@ namespace VehicleDestruction
                 return true;
             }
             return false;
-        }
-
-        public static void SendVehicleInfo(Vehicle vehicle)
-        {
-            VehicleDestructionMod.LastCrashedVehicle = vehicle;
-            VehicleDestructionMod.VehicleCrashSpeed = vehicle.GetSurfaceSpeed();
-            VehicleDestructionMod.VehicleCrashId = vehicle.Id;
-            VehicleDestructionMod.VehicleCrashedInto = vehicle.Parent;
         }
     }
 }
