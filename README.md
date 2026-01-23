@@ -1,7 +1,7 @@
 # VehicleDestruction
 
 This Mod adds destruction to vehicles in Kitten Space Agency.
-Currently, if you crash into an Astronomical (Planet, moon, asteriod) while going greater than 14m/s your vehicle will be destroyed.
+Currently, if you crash into an Astronomical (Planet, moon, asteroid) while going greater than 14m/s your vehicle will be destroyed.
 Please note this is still very janky due to colliders being a bit weird in KSA.
 
 Using ModMenu you can also view your last crash report if you want to see it again.

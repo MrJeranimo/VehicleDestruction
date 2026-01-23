@@ -9,10 +9,10 @@ namespace VehicleDestruction
     public class VehicleDestructionMod
     {
         public static bool CrashOccurred = false;
-        public static Vehicle LastCrashedVehicle = Vehicle.CreateBareBones(Universe.CurrentSystem!, "temp");
+        public static Vehicle LastCrashedVehicle = Vehicle.CreateBareBones(Universe.CurrentSystem!, "AEbtf4");
         public static double VehicleCrashSpeed = 0.0;
         public static string VehicleCrashId = "";
-        public static Astronomical VehicleCrashedInto = Vehicle.CreateBareBones(Universe.CurrentSystem!, "temp");
+        public static Astronomical VehicleCrashedInto = Vehicle.CreateBareBones(Universe.CurrentSystem!, "AEbtf4");
 
         [StarMapAfterGui]
         public void CollisionCheck(double dt)
@@ -35,7 +35,15 @@ namespace VehicleDestruction
         {
             if(CrashOccurred)
             {
-                if(ImGui.Begin("Vehicle Crash Report", ref CrashOccurred, ImGuiWindowFlags.AlwaysAutoResize))
+                if (LastCrashedVehicle.Id == "AEbtf4")
+                {
+                    if(ImGui.Begin("Vehicle Crash Log", ref CrashOccurred, ImGuiWindowFlags.AlwaysAutoResize))
+                    {
+                        ImGui.Text("No Vehicles crashed yet.");
+                    }
+                    ImGui.End();
+                }
+                else if(ImGui.Begin("Vehicle Crash Log", ref CrashOccurred, ImGuiWindowFlags.AlwaysAutoResize))
                 {
                     ImGui.Text($"Vehicle ID: {LastCrashedVehicle.Id}");
                     ImGui.Text($"Crash Speed: {LastCrashedVehicle.GetSurfaceSpeed():F2} m/s");
@@ -63,8 +71,8 @@ namespace VehicleDestruction
                             CrashOccurred = false;
                         }
                     }
+                    ImGui.End();
                 }
-                ImGui.End();
             }
         }
 
