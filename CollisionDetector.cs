@@ -1,5 +1,4 @@
-﻿using Brutal.Logging;
-using KSA;
+﻿using KSA;
 
 namespace VehicleDestruction
 {
@@ -27,7 +26,6 @@ namespace VehicleDestruction
                 if (Program.ControlledVehicle == vehicle)
                 {
                     Program.SetCameraMode(CameraMode.Map);
-                    VehicleDestructionMod.CrashOccurred = true;
                 }
 
                 // Gets rid of vehicle in Ground Tracking, GameAudio, and the parent Astronomical's Children list

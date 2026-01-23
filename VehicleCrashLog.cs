@@ -18,7 +18,7 @@ namespace VehicleDestruction
 
         public static void CreateCrashWindow()
         {
-            if (ImGui.Begin("Vehicle Crash Log", ref ShowWindow, ImGuiWindowFlags.AlwaysAutoResize))
+            if (ImGui.Begin("Vehicle Crash Log", ref ShowWindow, ImGuiWindowFlags.None))
             {
                 if (Crashes.Count == 0)
                 {

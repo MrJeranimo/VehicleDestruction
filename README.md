@@ -7,8 +7,7 @@ Please note this is still very janky due to colliders being a bit weird in KSA.
 Using ModMenu you can also view your last crash report if you want to see it again.
 
 **Known Issue:** 
-- Opening the last crash report without crashing a vehicle first will cause your game to crash. This is due to dummy data that is loaded.
-- The current logic only checks for collisions with your currently controlled vehicle. If you switch vehicles mid-flight the previous vehicle will not be affected by the collision checks.
+- The Crash Time in the log is currently wrong as the times are not being moduloed correctly.
 
 **License:** MIT License
 

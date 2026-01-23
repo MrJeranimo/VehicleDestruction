@@ -8,12 +8,6 @@ namespace VehicleDestruction
     [StarMapMod]
     public class VehicleDestructionMod
     {
-        public static bool CrashOccurred = false;
-        public static Vehicle LastCrashedVehicle = Vehicle.CreateBareBones(Universe.CurrentSystem!, "AEbtf4");
-        public static double VehicleCrashSpeed = 0.0;
-        public static string VehicleCrashId = "";
-        public static Astronomical VehicleCrashedInto = Vehicle.CreateBareBones(Universe.CurrentSystem!, "AEbtf4");
-
         [StarMapAfterGui]
         public void CollisionCheck(double dt)
         {
