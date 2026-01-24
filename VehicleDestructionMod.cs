@@ -23,8 +23,8 @@ namespace VehicleDestruction
             MHarmony.UnpatchAll(nameof(VehicleDestructionMod));
         }
 
-        [StarMapAfterGui]
-        public void CollisionCheck(double dt)
+        [StarMapAfterOnFrame]
+        public void CollisionCheck(double currentPlayerTime, double dtPlayer)
         {
             var vehicles = Universe.CurrentSystem?.Vehicles.GetList();
             if(vehicles != null)
