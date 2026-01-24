@@ -12,6 +12,7 @@ namespace VehicleDestruction
         [HarmonyPostfix]
         public static void Postfix(UncompressedSave __instance)
         {
+            VehicleDestructionMod.LoadingSave = true;
             JsonSerializerOptions options = new JsonSerializerOptions()
             {
                 WriteIndented = true,
@@ -23,7 +24,27 @@ namespace VehicleDestruction
             if (!File.Exists(path))
                 return;
 
-            VehicleCrashLog.Crashes = JsonSerializer.Deserialize<List<VehicleCrashInfo>>(File.ReadAllText(path), options) ?? new List<VehicleCrashInfo>();
+            var data = JsonSerializer.Deserialize<VehicleCrashData>(File.ReadAllText(path), options);
+
+            if (data != null)
+            {
+                VehicleCrashLog.Crashes = data.Crashes ?? new Stack<VehicleCrashInfo>();
+                CollisionDetector.CrashSpeedThreshold = data.CrashSpeedThreshold;
+                VehicleDestructionMod.tempThreshold = data.CrashSpeedThreshold;
+            }
+
+            // Remove crashed vehicles from the current system when loading save
+            foreach (var crash in VehicleCrashLog.Crashes)
+            {
+                Vehicle tempVehicle = Vehicle.CreateBareBones(Universe.CurrentSystem!, "temp");
+                Universe.CurrentSystem!.Vehicles.TryGet(crash.VehicleId, out tempVehicle);
+                if(tempVehicle.Id == crash.VehicleId)
+                {
+                    CollisionDetector.RemoveVehicle(tempVehicle);
+                }
+            }
+
+            VehicleDestructionMod.LoadingSave = false;
         }
     }
 }

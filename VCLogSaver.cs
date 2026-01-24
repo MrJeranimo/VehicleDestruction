@@ -19,7 +19,14 @@ namespace VehicleDestruction
                 DefaultIgnoreCondition = JsonIgnoreCondition.Never,
                 Converters = { new SimTimeConverter() }
             };
-            File.WriteAllText(Path.Combine(directory.FullName, "VehicleCrashLog.json"), JsonSerializer.Serialize<List<VehicleCrashInfo>>(VehicleCrashLog.Crashes, options));
+
+            var data = new VehicleCrashData
+            {
+                Crashes = VehicleCrashLog.Crashes,
+                CrashSpeedThreshold = CollisionDetector.CrashSpeedThreshold
+            };
+
+            File.WriteAllText(Path.Combine(directory.FullName, "VehicleCrashLog.json"), JsonSerializer.Serialize(data, options));
         }
     }
 }

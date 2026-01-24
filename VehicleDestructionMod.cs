@@ -10,6 +10,8 @@ namespace VehicleDestruction
     public class VehicleDestructionMod
     {
         public readonly Harmony MHarmony = new Harmony("VehicleDestruction");
+        public static bool LoadingSave = false;
+        public static double tempThreshold = CollisionDetector.CrashSpeedThreshold;
 
         [StarMapAllModsLoaded]
         public void Load()
@@ -56,6 +58,11 @@ namespace VehicleDestruction
         public void OpenLastCrashReport()
         {
             ImGui.MenuItem("Vehicle Crash Log", ImString.Null, ref VehicleCrashLog.ShowWindow);
+            ImGui.InputDouble("Crash Speed Threshold", ref tempThreshold);
+            if(ImGui.Button("Confirm Change"))
+            {
+                CollisionDetector.CrashSpeedThreshold = tempThreshold;
+            }
         }
     }
 }

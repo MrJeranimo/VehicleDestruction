@@ -5,10 +5,11 @@ namespace VehicleDestruction
     public class CollisionDetector
     {
         public static bool ShowPopup = false;
+        public static double CrashSpeedThreshold = 14.0;
 
         public static bool Collision(Vehicle vehicle)
         {
-            if (vehicle.LastKinematicStates.Situation.HasAnyContact() && vehicle.GetSurfaceSpeed() > 14.0)
+            if (vehicle.LastKinematicStates.Situation.HasAnyContact() && vehicle.GetSurfaceSpeed() > CrashSpeedThreshold && vehicle.GetRadarAltitude() <= vehicle.ObjectRadius)
             {
                 return DestroyVehicle(vehicle);
             }
@@ -20,10 +21,18 @@ namespace VehicleDestruction
 
         public static bool DestroyVehicle(Vehicle vehicle)
         {
+            VehicleCrashLog.LogCrash(vehicle, Universe.GetElapsedSimTime());
+            return RemoveVehicle(vehicle);
+        }
+
+        public static bool RemoveVehicle(Vehicle vehicle)
+        {
             var vehicles = Universe.CurrentSystem?.Vehicles;
-			if (vehicles != null)
-			{
-                VehicleCrashLog.LogCrash(vehicle, Universe.GetElapsedSimTime());
+            if (vehicles != null)
+            {
+                vehicle.Reset();
+
+                vehicle.StopThrust();
 
                 // Deregister the vehicle from the system's vehicle list
                 vehicles.Deregister(vehicle);
@@ -31,7 +40,7 @@ namespace VehicleDestruction
                 // Disable orbit display for the destroyed vehicle
                 vehicle.ShowOrbit = false;
 
-                if (Program.ControlledVehicle == vehicle)
+                if (Program.ControlledVehicle == vehicle && !VehicleDestructionMod.LoadingSave)
                 {
                     ShowPopup = true;
                 }

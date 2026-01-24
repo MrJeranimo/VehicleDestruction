@@ -16,7 +16,7 @@ namespace VehicleDestruction
 
     public class VehicleCrashLog
     {
-        public static List<VehicleCrashInfo> Crashes = new List<VehicleCrashInfo>();
+        public static Stack<VehicleCrashInfo> Crashes = new Stack<VehicleCrashInfo>();
         public static bool ShowWindow = false;
 
         public static void ShowCrashLog()
@@ -51,7 +51,7 @@ namespace VehicleDestruction
                 CrashedIntoId = vehicle.Parent.Id,
                 CrashTime = crashTime
             };
-            Crashes.Add(crashInfo);
+            Crashes.Push(crashInfo);
         }
 
         public static void CreateCrashReport()
