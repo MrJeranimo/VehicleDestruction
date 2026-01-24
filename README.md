@@ -7,7 +7,7 @@ Please note this is still very janky due to colliders being a bit weird in KSA.
 Using ModMenu you can also view your last crash report if you want to see it again.
 
 **Known Issue:** 
-- The Crash Time in the log is currently wrong as the times are not being moduloed correctly.
+- When loading a save and a already destroyed vehicle i reinstated, it will give an error because the old vehicle is no truely destroyed.
 
 **License:** MIT License
 

@@ -29,7 +29,11 @@ namespace VehicleDestruction
         {
             if(VehicleCrashLog.ShowWindow)
             {
-                VehicleCrashLog.CreateCrashWindow();
+                VehicleCrashLog.ShowCrashLog();
+            }
+            if(CollisionDetector.ShowPopup)
+            {
+                VehicleCrashLog.CreateCrashReport();
             }
         }
 
