@@ -1,15 +1,17 @@
 ﻿using Brutal.ImGuiApi;
 using Brutal.Numerics;
 using KSA;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace VehicleDestruction
 {
     public struct VehicleCrashInfo
     {
-        public string VehicleId;
-        public double CrashSpeed;
-        public string CrashedIntoId;
-        public SimTime CrashTime;
+        public string VehicleId { get; set; }
+        public double CrashSpeed { get; set; }
+        public string CrashedIntoId { get; set; }
+        public SimTime CrashTime { get; set; }
     }
 
     public class VehicleCrashLog
@@ -82,6 +84,25 @@ namespace VehicleDestruction
                 }
             }
             ImGui.EndPopup();
+        }
+    }
+
+    public class SimTimeConverter : JsonConverter<SimTime>
+    {
+        public override SimTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (reader.TokenType != JsonTokenType.Number)
+            {
+                throw new JsonException();
+            }
+
+            double seconds = reader.GetDouble();
+            return new SimTime(seconds);
+        }
+
+        public override void Write(Utf8JsonWriter writer, SimTime value, JsonSerializerOptions options)
+        {
+            writer.WriteNumberValue(value.Seconds());
         }
     }
 }

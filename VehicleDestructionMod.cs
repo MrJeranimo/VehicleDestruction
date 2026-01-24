@@ -1,4 +1,5 @@
 ﻿using Brutal.ImGuiApi;
+using HarmonyLib;
 using KSA;
 using ModMenu;
 using StarMap.API;
@@ -8,6 +9,20 @@ namespace VehicleDestruction
     [StarMapMod]
     public class VehicleDestructionMod
     {
+        public readonly Harmony MHarmony = new Harmony("VehicleDestruction");
+
+        [StarMapAllModsLoaded]
+        public void Load()
+        {
+            MHarmony.PatchAll(typeof(VehicleDestructionMod).Assembly);
+        }
+
+        [StarMapUnload]
+        public void Unload()
+        {
+            MHarmony.UnpatchAll(nameof(VehicleDestructionMod));
+        }
+
         [StarMapAfterGui]
         public void CollisionCheck(double dt)
         {

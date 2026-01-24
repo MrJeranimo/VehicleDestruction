@@ -7,7 +7,9 @@ Please note this is still very janky due to colliders being a bit weird in KSA.
 Using ModMenu you can also view your last crash report if you want to see it again.
 
 **Known Issue:** 
-- When loading a save and a already destroyed vehicle i reinstated, it will give an error because the old vehicle is no truely destroyed.
+- When loading a save and a already destroyed vehicle is reinstated, it will give an error because the old vehicle is not truely destroyed.
+- When loading a save, the Crash Log may make a duplicate of each Vehicle Crash Log entry.
+- When loading a save, the "[Vehicle] Crashed!" popup may appear again for crashes that already happened before saving.
 
 **License:** MIT License
 
