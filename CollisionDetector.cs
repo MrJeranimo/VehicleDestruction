@@ -9,7 +9,7 @@ namespace VehicleDestruction
 
         public static bool Collision(Vehicle vehicle)
         {
-            if (vehicle.LastKinematicStates.Situation.HasAnyContact() && vehicle.GetSurfaceSpeed() > CrashSpeedThreshold && vehicle.GetRadarAltitude() <= vehicle.ObjectRadius)
+            if (vehicle.GetRadarAltitude() <= vehicle.ObjectRadius && vehicle.GetSurfaceSpeed() > CrashSpeedThreshold)
             {
                 return DestroyVehicle(vehicle);
             }
