@@ -36,9 +36,9 @@ namespace VehicleDestruction
             // Remove crashed vehicles from the current system when loading save
             foreach (var crash in VehicleCrashLog.Crashes)
             {
-                Vehicle tempVehicle = Vehicle.CreateBareBones(Universe.CurrentSystem!, "temp");
+                Vehicle? tempVehicle = null;
                 Universe.CurrentSystem!.Vehicles.TryGet(crash.VehicleId, out tempVehicle);
-                if(tempVehicle.Id == crash.VehicleId)
+                if(tempVehicle != null && tempVehicle.Id == crash.VehicleId)
                 {
                     CollisionDetector.RemoveVehicle(tempVehicle);
                 }
