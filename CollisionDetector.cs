@@ -30,8 +30,6 @@ namespace VehicleDestruction
             var vehicles = Universe.CurrentSystem?.Vehicles;
             if (vehicles != null)
             {
-                vehicle.Reset();
-
                 vehicle.StopThrust();
 
                 // Deregister the vehicle from the system's vehicle list
