@@ -2,9 +2,11 @@
 
 This Mod adds destruction to vehicles in Kitten Space Agency.
 
-If you crash a vehicle into a StellarBody or another vehicle while going faster than 14m/s (default value) the vehicle with greater mass
+If you crash a vehicle into a StellarBody or another vehicle while going faster than 14m/s (default value) the vehicle with less mass
 will be destroyed. The other vehicle will not have any changes.
+
 You can change the crash speed threshold in the "VehicleDestruction" tab under the "Mods" menu.
+
 Please note this is still very janky due to colliders being a bit weird in KSA.
 
 Using ModMenu you can also view your last crash report if you want to see it again.
