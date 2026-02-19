@@ -1,14 +1,18 @@
 # VehicleDestruction
 
 This Mod adds destruction to vehicles in Kitten Space Agency.
-Currently, if you crash into an Astronomical (Planet, moon, asteroid) while going greater than 14m/s your vehicle will be destroyed.
+
+If you crash a vehicle into a StellarBody or another vehicle while going faster than 14m/s (default value) the vehicle with greater mass
+will be destroyed. The other vehicle will not have any changes.
+You can change the crash speed threshold in the "VehicleDestruction" tab under the "Mods" menu.
 Please note this is still very janky due to colliders being a bit weird in KSA.
 
 Using ModMenu you can also view your last crash report if you want to see it again.
 
 **Known Issue:** 
 
-- None
+- Camera flies away after a crash. (This is a tricky bug, sorry)
+- If you crash while your engine is on, the engine sound will stay on. (If you time warp to 30x speed or higher, the sound will go away even after going back to 1x speed)
 
 **License:** MIT License
 

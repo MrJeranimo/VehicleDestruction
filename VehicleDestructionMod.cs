@@ -28,17 +28,7 @@ namespace VehicleDestruction
         [StarMapAfterOnFrame]
         public void CollisionCheck(double currentPlayerTime, double dtPlayer)
         {
-            var vehicles = Universe.CurrentSystem?.Vehicles.GetList();
-            if(vehicles != null)
-            {
-                foreach (var vehicle in vehicles)
-                {
-                    if (CollisionDetector.Collision(vehicle))
-                    {
-                        break;
-                    }
-                }
-            }
+            CollisionDetector.CheckCollisions();
         }
 
         [StarMapBeforeGui]

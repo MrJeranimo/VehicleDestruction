@@ -34,7 +34,7 @@ namespace VehicleDestruction
                         ImGui.Text($"Vehicle ID: {crash.VehicleId}");
                         ImGui.Text($"Crash Speed: {crash.CrashSpeed:F2} m/s");
                         ImGui.Text($"Crashed Into: {crash.CrashedIntoId}");
-                        ImGui.TextWrapped($"Crash Time (from start): {crash.CrashTime.ValueIn(TimeUnit.Years):F0} Years, {crash.CrashTime.ValueIn(TimeUnit.Days)%360:F0} Days, {crash.CrashTime.ValueIn(TimeUnit.Hours)%24:F0} Hours, {crash.CrashTime.ValueIn(TimeUnit.Minutes)%60:F0} Minutes, and {crash.CrashTime.ValueIn(TimeUnit.Seconds)%60:F3} Seconds.");
+                        ImGui.TextWrapped($"Crash Time (from start): {crash.CrashTime.ValueIn(TimeUnit.Years):F0} Years, {crash.CrashTime.ValueIn(TimeUnit.Days)%365:F0} Days, {crash.CrashTime.ValueIn(TimeUnit.Hours)%24:F0} Hours, {crash.CrashTime.ValueIn(TimeUnit.Minutes)%60:F0} Minutes, and {crash.CrashTime.ValueIn(TimeUnit.Seconds)%60:F3} Seconds.");
                         ImGui.Separator();
                     }
                 }
@@ -42,13 +42,25 @@ namespace VehicleDestruction
             ImGui.End();
         }
 
-        public static void LogCrash(Vehicle vehicle, SimTime crashTime)
+        public static void LogCrashStellarBody(Vehicle vehicle, SimTime crashTime)
         {
             VehicleCrashInfo crashInfo = new VehicleCrashInfo
             {
                 VehicleId = vehicle.Id,
                 CrashSpeed = vehicle.GetSurfaceSpeed(),
                 CrashedIntoId = vehicle.Parent.Id,
+                CrashTime = crashTime
+            };
+            Crashes.Push(crashInfo);
+        }
+
+        public static void LogCrashVehicle(Vehicle vehicle, Vehicle crashedInto, double crashSpeed, SimTime crashTime)
+        {
+            VehicleCrashInfo crashInfo = new VehicleCrashInfo
+            {
+                VehicleId = vehicle.Id,
+                CrashSpeed = crashSpeed,
+                CrashedIntoId = crashedInto.Id,
                 CrashTime = crashTime
             };
             Crashes.Push(crashInfo);
@@ -70,7 +82,7 @@ namespace VehicleDestruction
                 ImGui.Text($"Vehicle ID: {crash.VehicleId}");
                 ImGui.Text($"Crash Speed: {crash.CrashSpeed:F2} m/s");
                 ImGui.Text($"Crashed Into: {crash.CrashedIntoId}");
-                ImGui.TextWrapped($"Crash Time (from start): {crash.CrashTime.ValueIn(TimeUnit.Years):F0} Years, {crash.CrashTime.ValueIn(TimeUnit.Days) % 360:F0} Days, {crash.CrashTime.ValueIn(TimeUnit.Hours) % 24:F0} Hours, {crash.CrashTime.ValueIn(TimeUnit.Minutes) % 60:F0} Minutes, and {crash.CrashTime.ValueIn(TimeUnit.Seconds) % 60:F3} Seconds.");
+                ImGui.TextWrapped($"Crash Time (from start): {crash.CrashTime.ValueIn(TimeUnit.Years):F0} Years, {crash.CrashTime.ValueIn(TimeUnit.Days) % 365:F0} Days, {crash.CrashTime.ValueIn(TimeUnit.Hours) % 24:F0} Hours, {crash.CrashTime.ValueIn(TimeUnit.Minutes) % 60:F0} Minutes, and {crash.CrashTime.ValueIn(TimeUnit.Seconds) % 60:F3} Seconds.");
                 ImGui.Separator();
                 ImGui.Text("Select a new vehicle control");
                 foreach(var vehicle in Universe.CurrentSystem!.Vehicles.GetList())
