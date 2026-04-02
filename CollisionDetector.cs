@@ -32,7 +32,7 @@ namespace VehicleDestruction
                             double distance = double3.Distance(firstVehicleCCIPosition, secondVehicleCCIPosition);
                             double relativeSpeed = double3.Distance(firstVehicleCCIVelocity, secondVehicleCCIVelocity);
 
-                            if (distance <= firstVehicle.BoundingSphereRadius && relativeSpeed >= CrashSpeedThreshold)
+                            if (distance <= firstVehicle.BoundingSphereRadiusBody && relativeSpeed >= CrashSpeedThreshold)
                             {
                                 if (firstVehicle.TotalMass > secondVehicle.TotalMass)
                                 {
@@ -43,7 +43,7 @@ namespace VehicleDestruction
                                     DestroyVehicleVehicle(firstVehicle, secondVehicle, relativeSpeed);
                                 }
                             }
-                            else if (distance <= secondVehicle.BoundingSphereRadius && relativeSpeed >= CrashSpeedThreshold)
+                            else if (distance <= secondVehicle.BoundingSphereRadiusBody && relativeSpeed >= CrashSpeedThreshold)
                             {
                                 if (firstVehicle.TotalMass > secondVehicle.TotalMass)
                                 {
@@ -58,7 +58,7 @@ namespace VehicleDestruction
                     }
 
                     // StellarBody collision check
-                    if (firstVehicle.GetRadarAltitude() <= firstVehicle.BoundingSphereRadius && firstVehicle.GetSurfaceSpeed() > CrashSpeedThreshold)
+                    if (firstVehicle.GetRadarAltitude() <= firstVehicle.BoundingSphereRadiusBody && firstVehicle.GetSurfaceSpeed() > CrashSpeedThreshold)
                     {
                         DestroyVehicleStellarBody(firstVehicle);
                     }
