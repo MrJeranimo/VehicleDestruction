@@ -37,7 +37,7 @@ namespace VehicleDestruction
             foreach (var crash in VehicleCrashLog.Crashes)
             {
                 Vehicle? tempVehicle = null;
-                Universe.CurrentSystem!.Vehicles.TryGet(crash.VehicleId, out tempVehicle);
+                Universe.CurrentSystem!.All.TryGet(crash.VehicleId, out tempVehicle);
                 if(tempVehicle != null && tempVehicle.Id == crash.VehicleId)
                 {
                     CollisionDetector.RemoveVehicle(tempVehicle);

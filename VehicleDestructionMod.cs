@@ -49,7 +49,7 @@ namespace VehicleDestruction
         {
             ImGui.MenuItem("Vehicle Crash Log", ImString.Null, ref VehicleCrashLog.ShowWindow);
             ImGui.InputDouble("Crash Speed Threshold", ref tempThreshold);
-            if(ImGui.Button("Confirm Change"))
+            if (ImGui.Button("Confirm Change"))
             {
                 CollisionDetector.CrashSpeedThreshold = tempThreshold;
             }

@@ -85,7 +85,7 @@ namespace VehicleDestruction
                 ImGui.TextWrapped($"Crash Time (from start): {crash.CrashTime.ValueIn(TimeUnit.Years):F0} Years, {crash.CrashTime.ValueIn(TimeUnit.Days) % 365:F0} Days, {crash.CrashTime.ValueIn(TimeUnit.Hours) % 24:F0} Hours, {crash.CrashTime.ValueIn(TimeUnit.Minutes) % 60:F0} Minutes, and {crash.CrashTime.ValueIn(TimeUnit.Seconds) % 60:F3} Seconds.");
                 ImGui.Separator();
                 ImGui.Text("Select a new vehicle control");
-                foreach(var vehicle in Universe.CurrentSystem!.Vehicles.GetList())
+                foreach(var vehicle in Universe.CurrentSystem?.All.UnsafeAsList().OfType<Vehicle>().ToList()!)
                 {
                     if(ImGui.Button(vehicle.Id))
                     {

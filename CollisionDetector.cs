@@ -10,7 +10,7 @@ namespace VehicleDestruction
 
         public static void CheckCollisions()
         {
-            List<Vehicle>? vehicles = Universe.CurrentSystem?.Vehicles.GetList();
+            List<Vehicle>? vehicles = Universe.CurrentSystem?.All.UnsafeAsList().OfType<Vehicle>().ToList();
             if (vehicles != null)
             {
                 for (int firstVehicleIndex = 0; firstVehicleIndex < vehicles.Count; firstVehicleIndex++)
@@ -80,7 +80,7 @@ namespace VehicleDestruction
 
         public static void RemoveVehicle(Vehicle vehicle)
         {
-            var vehicles = Universe.CurrentSystem?.Vehicles;
+            var vehicles = Universe.CurrentSystem?.All;
             if (vehicles != null)
             {
                 vehicle.StopThrust();

@@ -7,8 +7,8 @@
   </PropertyGroup>
 
 	<Target Name="PostBuild" AfterTargets="Build">
-		<MakeDir Directories="C:/Program Files/Kitten Space Agency/Content/"></MakeDir>
-		<Copy SourceFiles="$(TargetPath)" DestinationFolder="C:/Program Files/Kitten Space Agency/Content/VehicleDestruction" />
+		<MakeDir Directories="C:/Users/super/OneDrive/Documents/My Games/Kitten Space Agency/mods"></MakeDir>
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="C:/Users/super/OneDrive/Documents/My Games/Kitten Space Agency/mods/VehicleDestruction" />
 	</Target>
 
 	<ItemGroup>
